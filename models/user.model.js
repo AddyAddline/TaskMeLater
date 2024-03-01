@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const AutoIncrement = require("mongoose-sequence")(mongoose);
 const { UserPriority } = require("../utils/enums");
+const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema(
   {
