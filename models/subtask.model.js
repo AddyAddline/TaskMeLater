@@ -12,6 +12,7 @@ const subtaskSchema = new mongoose.Schema(
     task_id: {
       type: Number,
       ref: "Task",
+      required: true,
     },
     status: {
       type: Number,
@@ -27,6 +28,11 @@ const subtaskSchema = new mongoose.Schema(
     deleted_at: {
       type: Date,
     },
+    created_by:{
+      type: Number,
+      ref: "User",
+      required: true,
+    }
   },
 
   {
