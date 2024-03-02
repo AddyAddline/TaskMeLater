@@ -79,7 +79,7 @@ const loginUser= asyncHandler(async (req, res) => {
     res.status(200).json({
         success: true,
         message: "User logged in successfully",
-        token});
+        loginToken:token});
 });
 
 module.exports={registerUser,loginUser}
