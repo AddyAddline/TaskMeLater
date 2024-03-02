@@ -1,4 +1,4 @@
-const express = require("express");
+
 const {UserPriority} = require("../utils/enums");
 const User = require("../models/user.model");
 const asyncHandler = require("../utils/asyncHandler");
@@ -8,14 +8,14 @@ const registerUser= asyncHandler(async (req, res) => {
     const {phoneNumber, priority}=req.body;
 
     //validate 
-    if (!phoneNumber || !priority) {
+    if (!phoneNumber || priority===undefined || priority===null) {
        throw new ApiError(400, "Phone number and priority are required")
     }
     if(phoneNumber.length!==10){
         throw new ApiError(400, "Phone number must be 10 digits");
     }
     if(!Object.values(UserPriority).includes(priority)){
-        throw new ApiError(400, "Priority must be 1, 2 or 3(not a string)");
+        throw new ApiError(400, "Priority must be 0, 1 or 2(not a string)");
     }
     //check if user already exists
     const user= await User.findOne({
@@ -56,10 +56,16 @@ const loginUser= asyncHandler(async (req, res) => {
     }
 
   const token = user.generateAuthToken();
-    res.status(200).json({
+    res.
+    cookie("accessToken", token, {
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        httpOnly: true,
+        secure:true
+    }).
+    status(200).json({
         success: true,
         message: "User logged in successfully",
-        loginToken:token});
+        accessToken:token});
 });
 
 module.exports={registerUser,loginUser}
