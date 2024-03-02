@@ -39,7 +39,7 @@ userSchema.methods.generateAuthToken = function () {
     const token = jwt.sign(
         {
          
-        id: this.id,
+        user_id: this.user_id,
         phone_number: this.phone_number,
 
         },
