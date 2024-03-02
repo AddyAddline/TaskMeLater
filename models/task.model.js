@@ -4,7 +4,7 @@ const { TaskPriority, TaskStatus } = require("../utils/enums");
 
 const taskSchema = new mongoose.Schema(
   {
-    id: {
+    task_id: {
       type: Number,
       unique: true,
     },
@@ -59,7 +59,7 @@ const taskSchema = new mongoose.Schema(
 );
 
 // Auto-increment ID using mongoose-sequence
-taskSchema.plugin(AutoIncrement, { inc_field: "id" });
+taskSchema.plugin(AutoIncrement, { inc_field: "task_id" });
 
 const Task = mongoose.model("Task", taskSchema); 
 

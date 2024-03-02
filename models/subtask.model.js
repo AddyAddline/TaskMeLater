@@ -5,7 +5,7 @@ const { SubTaskStatus } = require("../utils/enums");
 
 const subtaskSchema = new mongoose.Schema(
   {
-    id: {
+    subtask_id: {
       type: Number,
         unique: true,
     },
@@ -38,7 +38,7 @@ const subtaskSchema = new mongoose.Schema(
   }
 );
 
-subtaskSchema.plugin(AutoIncrement, { inc_field: "id" });
+subtaskSchema.plugin(AutoIncrement, { inc_field: "subtask_id" });
 
 const SubTask = mongoose.model("SubTask", subtaskSchema);
 module.exports = SubTask;

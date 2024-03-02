@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema(
   {
-    id: {
+    user_id: {
       type: Number,
       unique: true, 
     },
@@ -33,11 +33,12 @@ const userSchema = new mongoose.Schema(
 );
 
 // Auto-increment ID using mongoose-sequence
-userSchema.plugin(AutoIncrement, { inc_field: "id" });
+userSchema.plugin(AutoIncrement, { inc_field: "user_id" });
 
 userSchema.methods.generateAuthToken = function () {
     const token = jwt.sign(
         {
+         
         id: this.id,
         phone_number: this.phone_number,
 
